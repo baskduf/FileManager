@@ -21,6 +21,8 @@ $(document).ready(function(){
             $("#lost-password-link").toggleClass("hidden",true);
             $("#sign_up").toggleClass("active-button",false);
             $("#log_in").removeAttr("disabled");
+
+            $("#error-message").toggleClass("hidden",true);
             
             $("#title-signup").toggleClass("hidden",false);
             $("#signup-fieldset").toggleClass("hidden",false);
@@ -36,6 +38,8 @@ $(document).ready(function(){
             $("#lost-password-link").toggleClass("hidden",false);
             $("#sign_up").toggleClass("active-button",true);
             $("#log_in").prop('disabled', true);
+
+            $("#error-message").toggleClass("hidden",true);
             
             $("#title-signup").toggleClass("hidden",true);
             $("#signup-fieldset").toggleClass("hidden",true);
@@ -52,6 +56,7 @@ $(document).ready(function(){
         const loginFieldset = document.getElementById("login-fieldset");
         const signupFieldset = document.getElementById("signup-fieldset");
         const loginForm = document.getElementById("login-form");
+        const errorMessage = document.getElementById("error-message");
     
         // 초기 설정
         let loginAction = "/login_process"; // 로그인 처리 경로
@@ -135,10 +140,16 @@ $(document).ready(function(){
                     // 성공 처리 로직
                 } else {
                     console.error('Error:', data);
+                    
+                    errorMessage.classList.remove("hidden");
+                    errorMessage.textContent = data.message;
                     // 에러 처리 로직
                 }
             }).catch(error => {
                 console.error('Error:', error);
+                
+                errorMessage.classList.remove("hidden");
+                errorMessage.textContent = error.message;
                 // 에러 처리 로직
             });
         

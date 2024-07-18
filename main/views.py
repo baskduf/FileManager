@@ -29,6 +29,7 @@ def signup_process(request):
         if not (email and username and password):
             return JsonResponse({'success': False, 'message': '모든 필드를 입력해주세요.'}, status=400)
 
+        
         # 사용자 생성
         try:
             user = User.objects.create_user(username=username, email=email, password=password)
