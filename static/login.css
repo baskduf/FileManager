@@ -79,7 +79,7 @@ button , .button , a {
     cursor: pointer;
 }
 
-form h1{
+h1{
     color: #fff;
     font-family: 'Open Sans', sans-serif;
     text-transform: uppercase;
@@ -271,7 +271,7 @@ a{
         font-size: 0.7em;
     }
     
-    form h1{
+    h1{
         font-size: 1.5em;
     }
     

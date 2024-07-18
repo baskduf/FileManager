@@ -7,7 +7,16 @@ import json
 
 # Create your views here.
 def index(request):
-    return render(request, 'login.html')
+    if request.user.is_authenticated:
+        return render(request, 'index.html')
+    else:
+        return render(request, 'login.html')
+    
+def logout_process(request):
+    logout(request)
+    return redirect('/')
+
+    
 
 def signup_process(request):
     # POST 요청에서 데이터 추출
@@ -26,8 +35,7 @@ def signup_process(request):
             return JsonResponse({'success': True, 'message': '회원가입이 완료되었습니다.'})
         except Exception as e:
             return JsonResponse({'success': False, 'message': f'회원가입 중 오류가 발생했습니다: {str(e)}'}, status=500)
-    else:
-        return JsonResponse({'success': False, 'message': 'POST 요청이 필요합니다'}, status=400)
+    
 
 def login_process(request):
     if request.method == 'POST':
@@ -37,6 +45,7 @@ def login_process(request):
             # 로그인 처리 로직
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                login(request, user)
                 return JsonResponse({'success': True, 'message': 'Logged in successfully'},status=200)
             else:
                 return JsonResponse({'success': False, 'message': 'Invalid credentials'}, status=400)
