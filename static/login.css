@@ -21,7 +21,7 @@ body {
     width: 450px;
     max-width: 90%;
     height: 700px;
-    background:url('https://picsum.photos/1000/1500?image=827')  #fff;
+    background:url('https://i.pinimg.com/736x/7c/de/7e/7cde7e88bc72afdd0f020c5827469623.jpg')  #fff;
     background-repeat:no-repeat;
     background-position: top center;
     background-size: cover;
@@ -52,7 +52,7 @@ form{
     display: inline-block;
     width: 100px;
     height: 40px;
-    background: #f03699;
+    background: #3b0c78;
     margin: 0px 10px 50px;
     border: none;
     color: #fff;
@@ -67,7 +67,7 @@ form{
 }
 
 .panel-switch button:active{
-    background: #b52773;
+    background: #3b0c78;
     color: #c9c9c9;
 }
 
@@ -188,7 +188,7 @@ fieldset input:focus {
     margin-top: 150px;
     border: none;
     border-radius: 10em;
-    background: #f03699;
+    background: #3b0c78;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
     text-transform: uppercase;
@@ -200,7 +200,7 @@ fieldset input:focus {
 }
 
 #login-form-submit:active{
-    background: #b52773;
+    background: #3b0c78;
     color: #c9c9c9;
 }
 
