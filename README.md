@@ -1,4 +1,4 @@
-# FileMAnager
+# FileManager
 Django FTP Service
 
 # Stack ✅
