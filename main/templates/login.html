@@ -1,52 +1,28 @@
-<html lang="en">
-    <link rel="stylesheet" href="/static/login.css">
-    
+<html>
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-        <!-- Font online-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-      
-<!--        Animate.css-->
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-                
-                                
-        
-        <!-- Google JQuery CDN -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
+        <link rel="stylesheet" href="/static/login.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="/static/login.js"></script>
-
     </head>
     <body>
-        <div>
-           <div class="panel shadow1">
-            <form id="login-form" class="login-form" method="post">
+        <div class="login-page">
+            <div class="form">
+              <form class="register-form signup-form" method="post" action="{% url 'signup_process' %}">
                 {% csrf_token %}
-                <div class="panel-switch animated fadeIn">
-                    <button type="button" id="sign_up" class="sign_up active-button">Sign Up</button>
-                    <button type="button" id="log_in" class="log_in">Log in</button>
-                </div>
-                <h1 class="animated fadeInUp animate1" id="title-login"></h1>
-                <h1 class="animated fadeInUp animate1 hidden" id="title-signup"></h1>
-                <fieldset id="login-fieldset">
-                    <input class="login animated fadeInUp animate2" id="login-username" name="username" type="text" placeholder="Username" value="">
-                    <input class="login animated fadeInUp animate3" id="login-password" name="password" type="password" placeholder="Password" value="">
-                </fieldset>
-                <fieldset id="signup-fieldset" class="hidden">
-                    <input class="login animated fadeInUp animate1" id="signup-email" name="email" type="text" placeholder="Email" value="">
-                    <input class="login animated fadeInUp animate2" id="signup-username" name="username" type="text" placeholder="Username" value="">
-                    <input class="login animated fadeInUp animate3" id="signup-password" name="password" type="password" placeholder="Password" value="">
-                </fieldset>
-                <div id="error-message" class="hidden" style="color: #3b0c78;"></div>
-                <input type="submit" id="login-form-submit" class="login_form button animated fadeInUp animate4" value="Login">
-                <input type="submit" id="signup-form-submit" class="login_form button animated fadeInUp animate4 hidden" value="Sign up">
-                <p><a id="lost-password-link" href="" class="animated fadeIn animate5">I forgot my login or password (!)</a></p>
-            </form>
+                <input type="text" name="signup-username" id="signup-username" placeholder="name"/>
+                <input type="password" name="signup-password" id="signup-password" placeholder="password"/>
+                <input type="text" name="signup-email" id="signup-email" placeholder="email address"/>
+                <button type="submit">create</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+              </form>
+              <form class="login-form" method="post" action="{% url 'login_process' %}">
+                {% csrf_token %}
+                <input type="text" name="login-username" id="login-username" placeholder="username"/>
+                <input type="password" name="login-password" id="login-password" placeholder="password"/>
+                <button type="submit">login</button> 
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+              </form>
             </div>
-        </div>
-        <script src="form.js"></script>
+          </div>
     </body>
 </html>
