@@ -1,58 +1,93 @@
 <html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/index.css">
     <link rel="stylesheet" href="/static/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div id="logo">LOGO</div>
+    </header>
     
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-        <!-- Font online-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-      
-<!--        Animate.css-->
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-                
-                                
-        
-        <!-- Google JQuery CDN -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
-        <script src="/static/login.js"></script>
-
-    </head>
-    <body>
-        <div>
-           <div class="panel shadow1">
-            <h1 class="animated fadeInUp animate1" id="title-signup" style="padding-top: 60px;">Welcome ! {{ request.user.username }}</h1>
-            <a href="{% url 'logout_process' %}" id="logout-link">
-                <input type="submit" id="login-form-submit" class="login_form button animated fadeInUp animate4" value="Logout">
-            </a>
-            
-            </div>
+    <!-- Flex 컨테이너 추가 -->
+    <div id="main-container">
+        <div id="file-block">
+            <ul class="file-list">
+                <li class="file-box">
+                    <span class="file-name">FileName.zip</span>
+                    <button class="delete-btn">삭제하기</button>
+                </li>
+                <li class="file-box">
+                    <span class="file-name">AnotherFile.zip</span>
+                    <button class="delete-btn">삭제하기</button>
+                </li>
+            </ul>
         </div>
-        <script>
-            document.getElementById('logout-link').addEventListener('click', function(event) {
-                event.preventDefault();  // 기본 링크 동작 방지
+        
+        <div id="login-block">
+            <div>
+                <h1 class="animated fadeInUp animate1" id="title-signup" style="padding-top: 60px;">
+                    Welcome ! {{ request.user.username }}
+                </h1>
+                <a href="{% url 'logout_process' %}" id="logout-link">
+                    <input type="submit" id="login-form-submit" class="login_form button animated fadeInUp animate4" value="Logout">
+                </a>
+            </div>
+            <!-- 드래그 앤 드롭 영역 추가 -->
+            <div id="drop-zone" class="drop-zone">
+                <p>여기에 파일을 드래그 앤 드롭하세요</p>
+            </div>
+            <!-- 드래그 앤 드롭된 파일 목록 표시 -->
+            <ul id="upload-list" class="drag-list">
+                <!-- 파일 목록이 여기에 추가됩니다 -->
+            </ul>
+        </div>
 
-                // 로그아웃 처리 함수 호출 (fetch API 등을 사용하여 AJAX 요청 가능)
-                fetch('/logout_process', {
-                    method: 'GET',
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('로그아웃 되었습니다.');
-                        // 여기에서 필요한 추가 로직을 추가할 수 있습니다.
-                        // 예: 로그아웃 후 화면 이동, 다른 동작 등
-                        window.location.href = "/";
-                    } else {
-                        console.error('로그아웃 요청 실패:', response.statusText);
-                    }
-                })
-                .catch(error => {
-                    console.error('네트워크 오류 발생:', error);
-                });
+        
+    </div>
+
+    
+    <footer>
+        <div class="pagination">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>&gt;</span>
+            <span>pagination</span>
+        </div>
+    </footer>
+    
+    <script src="/static/index.js"></script>
+    <script src="form.js"></script>
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            event.preventDefault();  // 기본 링크 동작 방지
+
+            // 로그아웃 처리 함수 호출 (fetch API 등을 사용하여 AJAX 요청 가능)
+            fetch('/logout_process', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('로그아웃 되었습니다.');
+                    window.location.href = "/";
+                } else {
+                    console.error('로그아웃 요청 실패:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('네트워크 오류 발생:', error);
+            });
         });
-        </script>
-        <script src="form.js"></script>
-    </body>
+    </script>
+    <script src="/static/drag.js"></script>
+    
+    
+</body>
 </html>
