@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'service.apps.ServiceConfig'
 ]
 
 ASGI_APPLICATION = 'chat_project.asgi.application'
