@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from main import views
+from service import views
 
 urlpatterns = [
+    path('delete-file/<str:file_name>/', views.delete_file, name='delete_file'),
+    path('generate-download-url/<str:file_name>/', views.generate_download_url, name='generate_download_url'),
     path('', views.index, name='index'),
+    path('upload-files/', views.upload_files, name='upload_files'),
 ]

@@ -8,7 +8,7 @@ import json
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+        return redirect('/service')
     else:
         return render(request, 'login.html')
     

@@ -19,7 +19,8 @@ from django.urls import path
 from django.urls import include
 
 urlpatterns = [
-    path('service', include('service.urls')),
+    
+    path('service/', include('service.urls')),
     path('', include('main.urls')),
     path('admin/', admin.site.urls),
 ]
