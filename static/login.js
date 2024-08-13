@@ -63,7 +63,7 @@
             }).then(data => {
                 if (data.success) {
                     console.log('Success:', data);
-                    window.location.href = "/";
+                    window.location.replace("/service");
                     // 성공 처리 로직
                 } else {
                     console.error('Error:', data);

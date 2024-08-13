@@ -33,7 +33,8 @@ def signup_process(request):
         # 사용자 생성
         try:
             user = User.objects.create_user(username=username, email=email, password=password)
-            return JsonResponse({'success': True, 'message': '회원가입이 완료되었습니다.'})
+            return redirect("/")
+            #return JsonResponse({'success': True, 'message': '회원가입이 완료되었습니다.'})
         except Exception as e:
             return JsonResponse({'success': False, 'message': f'회원가입 중 오류가 발생했습니다: {str(e)}'}, status=500)
     
@@ -47,7 +48,8 @@ def login_process(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return JsonResponse({'success': True, 'message': 'Logged in successfully'},status=200)
+                return redirect("/")
+                #return JsonResponse({'success': True, 'message': 'Logged in successfully'},status=200)
             else:
                 return JsonResponse({'success': False, 'message': 'Invalid credentials'}, status=400)
         except KeyError as e:
@@ -55,6 +57,3 @@ def login_process(request):
     else:
         return JsonResponse({'success': False, 'message': 'POST 요청이 필요합니다'}, status=400)
 
-
-def login_success(request):
-    return render(request, 'login_success.html')
