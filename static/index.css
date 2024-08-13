@@ -42,15 +42,22 @@
 
 /* pagenation 중앙 하단 배치 */
 footer {
-    display: flex;
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* 원하는 푸터 높이 설정 */
-    background-color: #f8f8f8; /* 필요에 따라 배경색 조정 */
+    background-color: gray;
+    text-align: center;
+    padding: 10px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination span {
+    margin: 0 5px;
+    cursor: pointer;
 }
 
 .drag-list {
@@ -99,3 +106,9 @@ footer {
 .delete-btn {
     margin-left: 10px;
 }
+body {
+    background: rgb(141,194,111);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;      
+  }
