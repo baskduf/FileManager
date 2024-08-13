@@ -34,18 +34,21 @@ def index(request):
 def delete_file(request, file_name):
     if request.method == 'DELETE':
         if request.user.is_authenticated:
-            try:
-                # Google Cloud Storage 클라이언트 설정
-                storage_client = storage.Client()
-                bucket = storage_client.bucket(settings.GS_BUCKET_NAME)
-                
-                # 파일 삭제
-                blob = bucket.blob(file_name)
-                blob.delete()
-                
-                return JsonResponse({'status': 'success'})
-            except Exception as e:
-                return JsonResponse({'error': str(e)}, status=500)
+            if request.user.is_superuser:
+                try:
+                    # Google Cloud Storage 클라이언트 설정
+                    storage_client = storage.Client()
+                    bucket = storage_client.bucket(settings.GS_BUCKET_NAME)
+                    
+                    # 파일 삭제
+                    blob = bucket.blob(file_name)
+                    blob.delete()
+                    
+                    return JsonResponse({'status': 'success'})
+                except Exception as e:
+                    return JsonResponse({'error': str(e)}, status=500)
+            else:
+                return JsonResponse({'error': 'user is not admin'}, status=403)
         else:
             return JsonResponse({'error': 'Not authenticated'}, status=403)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
@@ -78,21 +81,24 @@ def generate_download_url(request, file_name):
 def upload_files(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            try:
-                # Google Cloud Storage 클라이언트 설정
-                storage_client = storage.Client()
-                bucket = storage_client.bucket(settings.GS_BUCKET_NAME)
-                
-                file_names = []
-                for file in request.FILES.getlist('files'):
-                    # 업로드할 파일 이름 지정
-                    blob = bucket.blob(file.name)
-                    blob.upload_from_file(file)
-                    file_names.append(file.name)
-                
-                return JsonResponse({'files': file_names})
-            except Exception as e:
-                return JsonResponse({'error': str(e)}, status=500)
+            if request.user.is_superuser:
+                try:
+                    # Google Cloud Storage 클라이언트 설정
+                    storage_client = storage.Client()
+                    bucket = storage_client.bucket(settings.GS_BUCKET_NAME)
+                    
+                    file_names = []
+                    for file in request.FILES.getlist('files'):
+                        # 업로드할 파일 이름 지정
+                        blob = bucket.blob(file.name)
+                        blob.upload_from_file(file)
+                        file_names.append(file.name)
+                    
+                    return JsonResponse({'files': file_names})
+                except Exception as e:
+                    return JsonResponse({'error': str(e)}, status=500)
+            else:
+                return JsonResponse({'error': 'user is not admin'}, status=403)
         else:
             return JsonResponse({'error': 'Not authenticated'}, status=403)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
